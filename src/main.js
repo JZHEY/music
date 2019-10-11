@@ -7,11 +7,12 @@ import 'element-ui/lib/theme-chalk/index.css';
 import 'normalize.css/normalize.css'
 import remConfig from '@/util/remConfig'
 import api from './api/index'
-import axios from 'axios'
+import '@/assets/icon/iconfont.css'
+
 
 remConfig()
 
-axios.default.baseUrl = '/api'
+
 //去掉相关警告（用于生产不提醒）
 Vue.config.productionTip = false
 Vue.prototype.$api = api

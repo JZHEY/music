@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <login-bar :text=text></login-bar>
+    <login-bar :text = text :iconRight = iconRight :iconLeft = iconLeft></login-bar>
     <div class="content">
         <input type="password" placeholder="输入密码" v-model="password"/>
         <el-button class="imlogin" type="danger" round :disabled="isDisabled" @click="login">立即登录</el-button>
@@ -18,6 +18,8 @@ export default {
     data(){
         return {
             text:'手机号登录',
+            iconRight: null,
+            iconLeft:'icon-fanhui',
             password:null
         }
     },

@@ -1,6 +1,6 @@
 <template>
   <div class="bar">
-    <div class="left-icon">
+    <div class="left-icon" :class="newclass">
       
     </div>
     <div class="content">
@@ -23,5 +23,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="stylus">
+  
 
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <login-bar :text=text></login-bar>
+    <login-bar :text = text :iconRight = iconRight :iconLeft = iconLeft></login-bar>
     <div class="content">
         <div class="tip">未注册手机号登录后将会自动创建账号</div>
         <div class="phone">
@@ -20,6 +20,8 @@ export default {
     data(){
         return {
             text:'手机号登录',
+            iconRight:null,
+            iconLeft:'icon-fanhui',
             phone:null
         }
     },
