@@ -27,17 +27,25 @@
           <el-button class="right-btn" round size="mini">歌词广场</el-button>
         </div>
         <div class="recom-list">
-          <song-list></song-list>
+          <song-list :songList = songList></song-list>
         </div>
         
       </div>
       <!-- 新歌/新碟 -->
-      <div class="new-song">
-
+      <div class="new-song recom-song">
+        <div class="recom-title">
+          <div class="left-title">
+            <span>新碟</span> | <span>新歌</span>
+          </div>
+          <el-button class="right-btn" round size="mini">歌词广场</el-button>
+        </div>
+        <div class="recom-list">
+          <song-list :songList = newSongs></song-list>
+        </div>
       </div>
       <!-- 云村精选 -->
       <div class="select">
-
+        <bottom-menu></bottom-menu>
       </div>
   </div>
 </template>
@@ -46,6 +54,7 @@
 import LoginBar from '@/components/LoginBar'
 import IndexMenu from '@/components/IndexMenu'
 import SongList from '@/components/SongList'
+import BottomMenu from '@/components/BottomMenu'
 import api from '@/api/index'
 
 export default {
@@ -55,6 +64,8 @@ export default {
       text: null,
       iconRight:'icon-tongji',
       iconLeft: 'icon-huatong',
+      songList: [],
+      newSongs: [],
       imgs:[
         'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1570781009344&di=7d0c793edc3b116a692a7e614bff82ff&imgtype=0&src=http%3A%2F%2Fpic27.nipic.com%2F20130402%2F2786001_165104993000_2.jpg',
         'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1570781327707&di=30d456e7c98d95ac6f10292931a60189&imgtype=0&src=http%3A%2F%2Fpic39.nipic.com%2F20140329%2F5654593_113505353155_2.jpg',
@@ -66,17 +77,41 @@ export default {
   components:{
     LoginBar,
     IndexMenu,
-    SongList
+    SongList,
+    BottomMenu
   },
   methods:{
-    
+    getSongList(){
+      this.$api.recommend.popularRecommend().then(res => {
+          console.log(res)
+          if(res.status === 200){
+              this.songList = res.data.result
+          }
+      })
+    },
+    getNewSongs(){
+      this.$api.recommend.newSongs().then(res => {
+        console.log(res)
+        if(res.status === 200) {
+          this.newSongs = res.data.albums.slice(0,6)
+          console.log(this.newSongs)
+        }
+      })
+    },
+    texts(){
+      console.log('jdgjsagdjhgasdg')
+    }
+  },
+  mounted(){
+    this.getSongList()
+    this.getNewSongs()
   }
 }
 </script>
 
 <style lang="stylus" scoped>
 .recom-song
-  margin-top .5rem
+  margin-top 1rem
   .recom-title
     width 95%
     display flex
@@ -86,4 +121,15 @@ export default {
     .left-title
       font-size 1.6rem
       font-weight bold
+.new-song
+  margin-top 2rem
+
+.select
+  position fixed
+  width 100%
+  background-color LightGrey
+  opacity:0.9
+  height 5.5rem
+  bottom 0
+  left 0
 </style>

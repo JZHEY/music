@@ -1,7 +1,7 @@
 <template>
   <div class="menu">
       <div class="item-menu" v-for="item in menuList" :key="item.name">
-          <menu-item :icon=item.newclass :menuName=item.name></menu-item>
+          <menu-item :icon=item.newclass :menuName=item.name :menuSty=menuStyle></menu-item>
       </div>
   </div>
 </template>
@@ -16,7 +16,8 @@ export default {
     },
     data(){
         return {
-            menuList: index_menu
+            menuList: index_menu,
+            menuStyle:'menu-item'
         }
     }
 }

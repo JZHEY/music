@@ -27,6 +27,7 @@
 <script>
 // @ is an alias to /src
 import TopBar from '@/components/TopBar.vue'
+import { getCookie } from '@/util/tools'
 
 export default {
   name: 'LoginIndex',
@@ -51,7 +52,14 @@ export default {
       }
         
     }
-  }
+  },
+  beforeRouteEnter (to, from, next) {
+    if(getCookie()){
+      next({ name : 'find'})
+    } else {
+      next({ name: 'loginIndex' })
+    }
+  },
 }
 </script>
 

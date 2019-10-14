@@ -23,7 +23,7 @@ export default {
 
 <style lang="stylus" scoped>
 .song-item
-    margin-top .5rem
+    margin-top 1rem
     .song
         position relative
         width 9.5rem

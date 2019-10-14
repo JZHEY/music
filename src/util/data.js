@@ -1,5 +1,5 @@
 const index_menu = [
-    {
+    {   
         newclass: 'icon-rili1',
         name: '每日推荐'
     },
@@ -21,6 +21,26 @@ const index_menu = [
     }
 ]
 
+const bottom_menu = [
+    {
+        newclass: 'icon-faxian',
+        name: '发现'
+    },
+    {
+        newclass: 'icon-shipin',
+        name: '视频'
+    },
+    {
+        newclass: 'icon-yinle',
+        name: '我的'
+    },
+    {
+        newclass: 'icon-wo',
+        name: '账号'
+    },
+]
+
 module.exports = {
-    index_menu
+    index_menu,
+    bottom_menu
 }

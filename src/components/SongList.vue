@@ -12,26 +12,22 @@ import api from '@/api/index'
 
 export default {
     name: 'SongList',
+    props:{
+        songList: Array
+    },
     components:{
         RecommendItem
     },
     data(){
         return {
-            songList:[]
+            
         }
     },
     methods:{
-        getSongList(){
-            this.$api.recommend.popularRecommend().then(res => {
-                console.log(res)
-                if(res.status === 200){
-                    this.songList = res.data.result
-                }
-            })
-        }
+
     },
     mounted(){
-        this.getSongList()
+        
     }
 }
 </script>
