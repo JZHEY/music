@@ -45,7 +45,12 @@
       </div>
       <!-- 云村精选 -->
       <div class="select">
-        <bottom-menu></bottom-menu>
+        <cube-tab-bar
+          v-model="selectedLabelDefault"
+          :data="tabs"
+          @click="clickHandler"
+          @change="changeHandler">
+        </cube-tab-bar>
       </div>
   </div>
 </template>
@@ -55,6 +60,7 @@ import LoginBar from '@/components/LoginBar'
 import IndexMenu from '@/components/IndexMenu'
 import SongList from '@/components/SongList'
 import BottomMenu from '@/components/BottomMenu'
+import { bottom_menu, imgs } from '@/util/data.js'
 import api from '@/api/index'
 
 export default {
@@ -66,12 +72,9 @@ export default {
       iconLeft: 'icon-huatong',
       songList: [],
       newSongs: [],
-      imgs:[
-        'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1570781009344&di=7d0c793edc3b116a692a7e614bff82ff&imgtype=0&src=http%3A%2F%2Fpic27.nipic.com%2F20130402%2F2786001_165104993000_2.jpg',
-        'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1570781327707&di=30d456e7c98d95ac6f10292931a60189&imgtype=0&src=http%3A%2F%2Fpic39.nipic.com%2F20140329%2F5654593_113505353155_2.jpg',
-        'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1570781623913&di=d5ce58ccbb780de3e48b84da88c6aef3&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F58961d9d1335390ca777f363abbf12edd2909c7fdc0d-Urm3pL_fw658',
-        'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1570781748024&di=fc9ac15103f08732e6cd1b29a76bda16&imgtype=0&src=http%3A%2F%2Fdik.img.kttpdq.com%2Fpic%2F18%2F12390%2Fac68bc90af0058e8.jpg'
-      ]
+      selectedLabelDefault: '发现',
+      tabs: bottom_menu,
+      imgs
     }
   },
   components:{
@@ -98,8 +101,12 @@ export default {
         }
       })
     },
-    texts(){
-      console.log('jdgjsagdjhgasdg')
+     clickHandler (label) {
+      // if you clicked home tab, then print 'Home'
+      console.log(label)
+    },
+    changeHandler (label) {
+      // if you clicked different tab, this methods can be emitted
     }
   },
   mounted(){
@@ -129,7 +136,7 @@ export default {
   width 100%
   background-color LightGrey
   opacity:0.9
-  height 5.5rem
+  height 4.5rem
   bottom 0
   left 0
 </style>
