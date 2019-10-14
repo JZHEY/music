@@ -20,7 +20,12 @@
       </div>
       <!-- 推荐歌单 -->
       <div class="recom-song">
-        <div class="recom-title"></div>
+        <div class="recom-title">
+          <div class="left-title">
+            推荐歌单
+          </div>
+          <el-button class="right-btn" round size="mini">歌词广场</el-button>
+        </div>
         <div class="recom-list">
           <song-list></song-list>
         </div>
@@ -70,5 +75,15 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-
+.recom-song
+  margin-top .5rem
+  .recom-title
+    width 95%
+    display flex
+    justify-content space-between
+    align-items center
+    margin-left 2.5%
+    .left-title
+      font-size 1.6rem
+      font-weight bold
 </style>

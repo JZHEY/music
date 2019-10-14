@@ -3,7 +3,7 @@ import base from './base'
 
 const recommend = {
     popularRecommend() {
-        return axios.get(`${base.sq}/personalized`)
+        return axios.get(`${base.sq}/personalized?limit=6`)
     }
 }
 export default recommend

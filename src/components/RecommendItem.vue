@@ -1,11 +1,11 @@
 <template>
   <div class="song-item">
       <div class="song">
-          <div><img src="http://b-ssl.duitang.com/uploads/item/201612/04/20161204000928_jfHPk.jpeg" alt=""></div>
-          <span class="playcount"><i class="el-icon-caret-right"></i>205万</span>
+          <div><img :src=picUrl alt=""></div>
+          <span class="playcount"><i class="el-icon-caret-right"></i>{{ playCount }}</span>
       </div>
       <div class="des">
-          从这个秋日起，给自己一个新的开始，感受秋意浓郁
+          {{ name }}
       </div>
   </div>
 </template>
@@ -13,20 +13,25 @@
 <script>
 export default {
     name: 'RecommendItem',
-
+    props:{
+        picUrl: String,
+        name: String,
+        playCount: Number
+    }
 }
 </script>
 
 <style lang="stylus" scoped>
 .song-item
+    margin-top .5rem
     .song
         position relative
-        width 10rem
-        height 10rem
+        width 9.5rem
+        height 9.5rem
 
         img 
-            width 10rem
-            height 10rem
+            width 9.5rem
+            height 9.5rem
             border-radius 5px
         
         .playcount
@@ -36,9 +41,10 @@ export default {
             color white
             font-size 1.3rem
     .des
-        width 10rem
+        width 9.5rem
         font-size 1.3rem
         color DimGray
+        margin-top .3rem
         // 超出2行省略
         display: -webkit-box;
         -webkit-box-orient: vertical;
