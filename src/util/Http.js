@@ -15,7 +15,7 @@ import store from '../store';
 
 // axios.default.baseUrl = '/api'
 // console.log(axios.default.baseUrl)
-// axios.defaults.withCredentials=true
+axios.defaults.withCredentials=true
 
 const tip = (msg,obj) => {
     obj.$message({

@@ -1,23 +1,28 @@
 const index_menu = [
     {   
         newclass: 'icon-rili1',
-        name: '每日推荐'
+        name: '每日推荐',
+        label: 'every'
     },
     {
         newclass: 'icon-gedan',
-        name:'歌单'
+        name:'歌单',
+        label:'songlist'
     },
     {
         newclass: 'icon-paihangbang1',
-        name: '排行榜'
+        name: '排行榜',
+        label:'ranking'
     },
     {
         newclass:'icon-xianxing_diantai',
-        name:'电台'
+        name:'电台',
+        label:'radio'
     },
     {
         newclass: 'icon-15',
-        name: '直播'
+        name: '直播',
+        label:'broadcast'
     }
 ]
 

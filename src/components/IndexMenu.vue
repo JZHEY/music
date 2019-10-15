@@ -1,6 +1,6 @@
 <template>
   <div class="menu">
-      <div class="item-menu" v-for="item in menuList" :key="item.name">
+      <div class="item-menu" v-for="item in menuList" :key="item.name" @click="handleClick(item.label)">
           <menu-item :icon=item.newclass :menuName=item.name :menuSty=menuStyle></menu-item>
       </div>
   </div>
@@ -18,6 +18,14 @@ export default {
         return {
             menuList: index_menu,
             menuStyle:'menu-item'
+        }
+    },
+    methods:{
+        handleClick(name){
+            console.log(name)
+            if(name == 'every'){
+                this.$router.push('everydayRecomm')
+            }
         }
     }
 }

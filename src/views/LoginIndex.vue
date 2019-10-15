@@ -26,7 +26,7 @@
 
 <script>
 // @ is an alias to /src
-import TopBar from '@/components/TopBar.vue'
+// import TopBar from '@/components/TopBar.vue'
 import { getCookie } from '@/util/tools'
 
 export default {
@@ -38,7 +38,7 @@ export default {
     }
   },
   components: {
-    TopBar
+    // TopBar
   },
   methods:{
     goLoginPhone(){

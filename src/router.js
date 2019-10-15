@@ -34,6 +34,11 @@ const router = new Router({
       path: '/find',
       name: 'find',
       component: () => import('./views/Find.vue')
+    },
+    {
+      path: '/everydayRecomm',
+      name: 'everydayRecomm',
+      component: () => import('./views/EverydayRecom.vue')
     }
   ]
 })

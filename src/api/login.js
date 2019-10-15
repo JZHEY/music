@@ -2,6 +2,7 @@ import axios from "@/util/Http.js"
 // import qs from 'qs'
 import base from './base'
 
+//登录接口
 const login = {
     phoneLogin (params) {
         // console.log(base.sq)

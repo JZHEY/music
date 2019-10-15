@@ -43,15 +43,8 @@
           <song-list :songList = newSongs></song-list>
         </div>
       </div>
-      <!-- 云村精选 -->
-      <div class="select">
-        <cube-tab-bar
-          v-model="selectedLabelDefault"
-          :data="tabs"
-          @click="clickHandler"
-          @change="changeHandler">
-        </cube-tab-bar>
-      </div>
+      <!-- 底部导航 -->
+      <bottom-menu></bottom-menu>
   </div>
 </template>
 
@@ -60,7 +53,7 @@ import LoginBar from '@/components/LoginBar'
 import IndexMenu from '@/components/IndexMenu'
 import SongList from '@/components/SongList'
 import BottomMenu from '@/components/BottomMenu'
-import { bottom_menu, imgs } from '@/util/data.js'
+import { imgs } from '@/util/data.js'
 import api from '@/api/index'
 
 export default {
@@ -72,8 +65,6 @@ export default {
       iconLeft: 'icon-huatong',
       songList: [],
       newSongs: [],
-      selectedLabelDefault: '发现',
-      tabs: bottom_menu,
       imgs
     }
   },
@@ -101,13 +92,7 @@ export default {
         }
       })
     },
-     clickHandler (label) {
-      // if you clicked home tab, then print 'Home'
-      console.log(label)
-    },
-    changeHandler (label) {
-      // if you clicked different tab, this methods can be emitted
-    }
+    
   },
   mounted(){
     this.getSongList()
@@ -130,13 +115,7 @@ export default {
       font-weight bold
 .new-song
   margin-top 2rem
+  margin-bottom 5.5rem
 
-.select
-  position fixed
-  width 100%
-  background-color LightGrey
-  opacity:0.9
-  height 4.5rem
-  bottom 0
-  left 0
+
 </style>

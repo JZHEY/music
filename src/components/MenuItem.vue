@@ -18,6 +18,9 @@ export default {
         menuSty: String,
         index:Number
     },
+    components:{
+
+    },
     computed:{
 
     }
