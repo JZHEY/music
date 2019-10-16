@@ -39,6 +39,11 @@ const router = new Router({
       path: '/everydayRecomm',
       name: 'everydayRecomm',
       component: () => import('./views/EverydayRecom.vue')
+    },
+    {
+      path: '/play',
+      name: 'play',
+      component: () => import('./views/Play.vue')
     }
   ]
 })

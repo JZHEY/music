@@ -14,7 +14,16 @@ const recommend = {
     everydayRecommend() {
         return axios.get(`${base.sq}/recommend/songs`)
     },
-
+    songDetail(params) {
+        return axios.get(`${base.sq}/song/detail`,{
+            params:params
+        })
+    },
+    albumDetail(params) {
+        return axios.get(`${base.sq}/album`,{
+            params:params
+        })
+    }
     
 }
 export default recommend

@@ -13,7 +13,7 @@
               <play-bar></play-bar>
           </div>
           <div class="song-list">
-              <div class="item" v-for="item in detailList" :key="item.id">
+              <div class="item" v-for="item in detailList" :key="item.id" @click="gotoPlay(item.id,item.albumId,item.desc)">
                   <song-item :detail=item></song-item>
               </div>
           </div>
@@ -69,6 +69,7 @@ export default {
                 });
                 this.detailList.push({
                     picUrl:item.album.picUrl,
+                    albumId:item.album.id,
                     name:item.name,
                     desc:des.substr(0,des.length-1),
                     id:item.id
@@ -77,6 +78,10 @@ export default {
             });
 
             console.log(this.detailList)
+        },
+
+        gotoPlay(id,albumId,des){
+            this.$router.push({name:'play',query:{id:id,albumId:albumId,des:des}})
         }
     },
     mounted(){
