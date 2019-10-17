@@ -24,8 +24,8 @@ const recommend = {
             params:params
         })
     },
-    songUrL(params) {
-        return aixos.get(`${base.sq}/song/url`,{
+    songUrl(params) {
+        return axios.get(`${base.sq}/song/url`,{
             params:params
         })
     }

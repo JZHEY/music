@@ -25,7 +25,7 @@
         </div>
 
         <div class="progress">
-            
+            <vue-audio :url=url></vue-audio>
             
         </div>
 
@@ -60,7 +60,8 @@ export default {
             iconRight:'icon-fenxiang',
             albumData:{},
             songData:{},
-            des:''
+            des:'',
+            url:''
         }
     },
     methods:{
@@ -84,22 +85,29 @@ export default {
                 if(res.status === 200) {
                     this.songData = res.data.songs
                     this.text = this.songData[0].name
+                    this.getSongUrl(this.songData[0].id)
                 }
             })
         },
 
         getSongUrl(id){
             this.$api.recommend.songUrl({
-                id
+                id:id
             }).then(res => {
                 console.log(res)
+                if(res.status === 200){
+                   this.url = res.data.data[0].url
+                }
+                
             })
+            // console.log(this.songData[0])
         }
     },
     mounted(){
         this.getAlbumDetail(this.$route.query.albumId)
         this.getSongDetail(this.$route.query.id)
         this.des = this.$route.query.des
+        
     }
 }
 </script>
@@ -154,16 +162,8 @@ export default {
                 font-size 3rem
         
         .progress
-            display flex
-            align-items center
-            text-align center
+            width 100%
             height 30%
-
-            span
-                width 5rem
-            
-            .el-slider
-                flex 1
         
         .play-operation
             display flex
