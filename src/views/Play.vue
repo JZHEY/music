@@ -1,6 +1,6 @@
 <template>
   <div class="play">
-      <audio src=""></audio>
+      
       <div class="bar">
           <login-bar :iconLeft=iconLeft :text=text :iconRight=iconRight></login-bar>
       </div>
@@ -25,9 +25,8 @@
         </div>
 
         <div class="progress">
-            <span>00:00</span>
-            <el-slider :show-tooltip="false"></el-slider>
-            <span>03:36</span>
+            
+            
         </div>
 
 
@@ -45,12 +44,14 @@
 
 <script>
 import LoginBar from '@/components/LoginBar.vue'
+import VueAudio from '@/components/Audio.vue'
 import api from '@/api/index'
 
 export default {
     name:'Play',
     components:{
-        LoginBar
+        LoginBar,
+        VueAudio
     },
     data(){
         return {
@@ -84,6 +85,14 @@ export default {
                     this.songData = res.data.songs
                     this.text = this.songData[0].name
                 }
+            })
+        },
+
+        getSongUrl(id){
+            this.$api.recommend.songUrl({
+                id
+            }).then(res => {
+                console.log(res)
             })
         }
     },

@@ -23,7 +23,11 @@ const recommend = {
         return axios.get(`${base.sq}/album`,{
             params:params
         })
+    },
+    songUrL(params) {
+        return aixos.get(`${base.sq}/song/url`,{
+            params:params
+        })
     }
-    
 }
 export default recommend
