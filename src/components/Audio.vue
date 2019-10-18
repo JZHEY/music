@@ -42,10 +42,16 @@ export default {
     musicPlayOrNo(){
       if(this.$refs.audio.paused){
         this.$refs.audio.play()
+        // console.log('kai')
+        return true
       } else {
         this.$refs.audio.pause()
+        // console.log('guan')
+        return false
       }
     },
+
+    
   },
 
   mounted(){

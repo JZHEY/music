@@ -10,7 +10,7 @@
 
       <div class="play-spin">
           <div class="pic">
-              <img :src=albumData.blurPicUrl alt="" style="width:17rem;height:17rem;border-radius:50%">
+              <img :src=albumData.blurPicUrl style="width:17rem;height:17rem;border-radius:50%" :style="{transform:'rotateZ('+deg+'deg)'}" ref="picture">
           </div>
       </div>
     
@@ -25,7 +25,7 @@
         </div>
 
         <div class="progress">
-            <vue-audio :url=url></vue-audio>
+            <vue-audio :url=url ref="vueaudio"></vue-audio>
             
         </div>
 
@@ -33,7 +33,7 @@
         <div class="play-operation">
             <div class="iconfont icon-xunhuanbofang"></div>
             <div class="iconfont icon-shangyishoushangyige"></div>
-            <div class="iconfont icon-bofang1" style="font-size:6rem"></div>
+            <div class="iconfont " :class="[playIcon ? 'icon-bofang1' : 'icon-bofang3']" style="font-size:6rem" @click="playOrNo"></div>
             <div class="iconfont icon-xiayigexiayishou"></div>
             <div class="iconfont icon-liebiao"></div>
         </div>
@@ -60,8 +60,11 @@ export default {
             iconRight:'icon-fenxiang',
             albumData:{},
             songData:{},
-            des:'',
-            url:''
+            des:'',//歌手名字
+            url:'',//图片地址
+            playIcon:'',//音乐是否播放
+            deg:0, //转动角度
+            timer:null //图片转动定时器
         }
     },
     methods:{
@@ -101,11 +104,35 @@ export default {
                 
             })
             // console.log(this.songData[0])
+        },
+
+        playOrNo(){
+            this.playIcon = this.$refs.vueaudio.musicPlayOrNo()
+            // this.rotate()
+            this.rotate(this.playIcon)
+        },
+
+        rotate(playIcon) {
+            if(playIcon){
+                // console.log(`kai·····`)
+                this.timer = setInterval(() => {
+                    this.deg += 1
+
+                    if(this.deg > 360){
+                        this.deg = 0
+                    }
+                }, 30);
+            } else {
+                // console.log(`guan·····`)
+                clearInterval(this.timer)
+                this.timer = null
+            }
         }
     },
     mounted(){
         this.getAlbumDetail(this.$route.query.albumId)
         this.getSongDetail(this.$route.query.id)
+        this.playOrNo()
         this.des = this.$route.query.des
         
     }
