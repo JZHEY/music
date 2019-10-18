@@ -5,7 +5,7 @@
     @timeupdate="onTimeupdate"></audio>
     <div class="play-slider">
       <span>{{ currentTime * 100 | formatTime }}</span>
-      <el-slider :show-tooltip="false" v-model="currentTime" :max=maxTime></el-slider>
+      <el-slider :show-tooltip="false" v-model="currentTime" :max=maxTime :step=currentTime/100 @change="sliderChang"></el-slider>
       <span>{{ duration | formatTime }}</span>
     </div>
   </div>
@@ -51,6 +51,10 @@ export default {
       }
     },
 
+    sliderChang(val){
+      // console.log(val)
+      this.$refs.audio.currentTime = val * 100
+    }
     
   },
 

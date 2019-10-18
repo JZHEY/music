@@ -31,7 +31,7 @@
 
 
         <div class="play-operation">
-            <div class="iconfont icon-xunhuanbofang"></div>
+            <div class="iconfont icon-danquxunhuan"></div>
             <div class="iconfont icon-shangyishoushangyige"></div>
             <div class="iconfont " :class="[playIcon ? 'icon-bofang1' : 'icon-bofang3']" style="font-size:6rem" @click="playOrNo"></div>
             <div class="iconfont icon-xiayigexiayishou"></div>
