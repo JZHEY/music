@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { Message } from 'element-ui';
 import router from '../router'
-import store from '../store';
+import store from '@/vuex/index';
 
 // let baseUrl = ''
 

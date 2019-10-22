@@ -13,7 +13,8 @@
               <play-bar></play-bar>
           </div>
           <div class="song-list">
-              <div class="item" v-for="item in detailList" :key="item.id" @click="gotoPlay(item.id,item.albumId,item.desc)">
+              <!-- <div class="item" v-for="item in detailList" :key="item.id" @click="gotoPlay(item.id,item.albumId,item.desc)"> -->
+              <div class="item" v-for="(item,index) in detailList" :key="item.id" @click="gotoPlay(index)">
                   <song-item :detail=item></song-item>
               </div>
           </div>
@@ -30,6 +31,7 @@ import PlayBar from '@/components/PlayBar'
 import SongItem from '@/components/SongItem'
 import BottomMenu from '@/components/BottomMenu'
 import api from '@/api/index'
+import {mapState,mapGetters,mapMutations} from 'vuex';
 export default {
     name: 'EverydayRecomm',
     components:{
@@ -76,12 +78,16 @@ export default {
                 })
                 des = ''
             });
-
+            this.changeSongList(this.detailList)
             console.log(this.detailList)
         },
-
-        gotoPlay(id,albumId,des){
-            this.$router.push({name:'play',query:{id:id,albumId:albumId,des:des}})
+        ...mapMutations(['changeCurrentSong','changeSongList']),
+        // gotoPlay(id,albumId,des){
+        gotoPlay(index){
+            // this.$router.push({name:'play',query:{id:id,albumId:albumId,des:des}})
+            this.changeCurrentSong(index)
+            console.log(index)
+            this.$router.push({name:'play',query:{index:index}})
         }
     },
     mounted(){
