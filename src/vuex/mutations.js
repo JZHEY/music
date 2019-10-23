@@ -4,27 +4,30 @@ export default {
         state.songList = data
     },
 
-    nextSong:(state) => {
-
-    },
-
     changeCurrentSong: (state,index) => {
         console.log('changeCurrentSong:' + index)
         state.currentSong = index
+        state.audio = state.songList[state.currentSong]
+        console.log(state.audio)
     },
+
 
     //下一首
     addCurrentSong: (state) => {
-        if(state.currentSong > 0){
+        if(state.currentSong < state.songList.length+1){
             console.log(state.currentSong)
-            return state.currentSong++
+            state.currentSong++
+            state.audio = state.songList[state.currentSong]
+            return state.audio.id
         }
      },
      //上一首
      reduceCurrentSong: (state) => {
          if(state.currentSong > 0){
-             console.log(state.currentSong)
-            return state.currentSong--
+            state.currentSong--
+            console.log(state.currentSong)
+            state.audio = state.songList[state.currentSong]
+            return state.audio.id
          }
      }
 }

@@ -5,12 +5,12 @@
           <login-bar :iconLeft=iconLeft :text=text :iconRight=iconRight></login-bar>
       </div>
       <div class="singer">
-            {{ songList[index].desc }}
+            {{ audio.desc }}
         </div>
 
       <div class="play-spin">
           <div class="pic">
-              <img :src=songList[index].picUrl style="width:17rem;height:17rem;border-radius:50%" :style="{transform:'rotateZ('+deg+'deg)'}" ref="picture">
+              <img :src=audio.picUrl style="width:17rem;height:17rem;border-radius:50%" :style="{transform:'rotateZ('+deg+'deg)'}" ref="picture">
           </div>
       </div>
     
@@ -32,9 +32,9 @@
 
         <div class="play-operation">
             <div class="iconfont icon-danquxunhuan"></div>
-            <div class="iconfont icon-shangyishoushangyige" @click="reduceCurrentSong"></div>
+            <div class="iconfont icon-shangyishoushangyige" @click="preSong"></div>
             <div class="iconfont " :class="[playIcon ? 'icon-bofang1' : 'icon-bofang3']" style="font-size:6rem" @click="playOrNo"></div>
-            <div class="iconfont icon-xiayigexiayishou" @click="addCurrentSong"></div>
+            <div class="iconfont icon-xiayigexiayishou" @click="nextSong"></div>
             <div class="iconfont icon-liebiao"></div>
         </div>
       </div>
@@ -82,6 +82,19 @@ export default {
                     console.log(this.albumData)
                 }
             })
+        },
+
+        nextSong(){
+            this.addCurrentSong()
+            let id = this.audio.id
+            console.log(id)
+            this.getSongDetail(id)
+        },
+
+        preSong(){
+            this.reduceCurrentSong()
+            let id = this.audio.id
+            this.getSongDetail(id)
         },
         
         getSongDetail(id){
@@ -135,13 +148,13 @@ export default {
     },
     computed:{
         // ...mapGetters(['getSongList'])
-        ...mapState(['songList'])
+        ...mapState(['audio'])
     },
 
     mounted(){
         this.index = this.$route.query.index
         // this.getAlbumDetail(this.getSongList[this.index].id)
-        this.getSongDetail(this.songList[this.index].id)
+        this.getSongDetail(this.audio.id)
         this.playOrNo()
         // this.des = this.$route.query.des
         
