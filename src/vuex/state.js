@@ -8,5 +8,6 @@ export default {
     },
     currentSong: 0,//当前播放得歌曲
     currentTime: 0, //当前播放时间
-    duration: 0 ,//结束时间
+    duration: 0 ,//结束时间    
+    playType: 1, //播放方式 0 单曲循环 1 列表循环
 }

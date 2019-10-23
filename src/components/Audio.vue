@@ -1,6 +1,6 @@
 <template>
   <div class="audio">
-    <audio :src="url" ref="audio" autoplay loop
+    <audio :src="url" ref="audio" autoplay :loop="playType == 0 ? true:false"
     @loadedmetadata="onLoadedmetadata"
     @timeupdate="onTimeupdate"></audio>
     <div class="play-slider">
@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import {mapState,mapGetters,mapMutations} from 'vuex';
 export default {
   name: "Audio",
   props: {
@@ -25,17 +26,24 @@ export default {
     };
   },
   methods:{
+    ...mapMutations(['addCurrentSong','reduceCurrentSong']),
     onLoadedmetadata(res) {
       // console.log(res.target.duration)
-      this.duration = res.target.duration
+      this.duration = res.target.duration 
     },
 
     onTimeupdate(res){
       // console.log(res.target.currentTime)
-      this.currentTime = res.target.currentTime /100
+
+      this.currentTime = res.target.currentTime / 100
       this.maxTime = this.duration / 100
-      if(this.currentTime == this.duration){
+      // console.log(this.currentTime,this.duration)
+      if(this.currentTime * 100 == this.duration && this.currentTime > 0 && this.duration > 0){
         this.currentTime = 0
+        console.log('end   end')
+        if(this.playType == 1){
+          this.$parent.nextSong()
+        }
       }
     },
 
@@ -56,6 +64,10 @@ export default {
       this.$refs.audio.currentTime = val * 100
     }
     
+  },
+
+  computed:{
+    ...mapState(['playType'])
   },
 
   mounted(){

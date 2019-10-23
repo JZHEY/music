@@ -29,6 +29,11 @@ export default {
             state.audio = state.songList[state.currentSong]
             return state.audio.id
          }
+     },
+
+     //改变播放方式
+     changePlayType: (state,index) => {
+        state.playType = index
      }
 }
 

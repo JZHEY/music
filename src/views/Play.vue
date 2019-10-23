@@ -31,7 +31,7 @@
 
 
         <div class="play-operation">
-            <div class="iconfont icon-danquxunhuan"></div>
+            <div class="iconfont " :class=typeIcon[playType] @click="changeType"></div>
             <div class="iconfont icon-shangyishoushangyige" @click="preSong"></div>
             <div class="iconfont " :class="[playIcon ? 'icon-bofang1' : 'icon-bofang3']" style="font-size:6rem" @click="playOrNo"></div>
             <div class="iconfont icon-xiayigexiayishou" @click="nextSong"></div>
@@ -59,18 +59,17 @@ export default {
             iconLeft:'icon-fanhui',
             text:'可惜我是水瓶座',
             iconRight:'icon-fenxiang',
-            albumData:{},
             songData:{},
-            // des:'',//歌手名字
-            index:0,
+            index:0,//歌曲下标索引
             url:'',//图片地址
             playIcon:'',//音乐是否播放
             deg:0, //转动角度
-            timer:null //图片转动定时器
+            timer:null, //图片转动定时器
+            typeIcon:['icon-danquxunhuan','icon-xunhuanbofang']
         }
     },
     methods:{
-        ...mapMutations(['addCurrentSong','reduceCurrentSong']),
+        ...mapMutations(['addCurrentSong','reduceCurrentSong','changePlayType']),
         //获取专辑详细信息
         getAlbumDetail(id){
             this.$api.recommend.albumDetail({
@@ -84,6 +83,7 @@ export default {
             })
         },
 
+        //下一曲
         nextSong(){
             this.addCurrentSong()
             let id = this.audio.id
@@ -91,12 +91,14 @@ export default {
             this.getSongDetail(id)
         },
 
+        //上一曲
         preSong(){
             this.reduceCurrentSong()
             let id = this.audio.id
             this.getSongDetail(id)
         },
         
+        //获取歌曲的详细信息
         getSongDetail(id){
             this.$api.recommend.songDetail({
                 ids:id
@@ -110,6 +112,7 @@ export default {
             })
         },
 
+        //获取歌曲的播放url
         getSongUrl(id){
             this.$api.recommend.songUrl({
                 id:id
@@ -123,12 +126,14 @@ export default {
             // console.log(this.songData[0])
         },
 
+        //判断音乐是否播放
         playOrNo(){
             this.playIcon = this.$refs.vueaudio.musicPlayOrNo()
             // this.rotate()
             this.rotate(this.playIcon)
         },
 
+        //旋转
         rotate(playIcon) {
             if(playIcon){
                 // console.log(`kai·····`)
@@ -144,11 +149,33 @@ export default {
                 clearInterval(this.timer)
                 this.timer = null
             }
+        },
+
+        //喜欢 还没实现 因为 找不到显示是否喜欢的接口
+        likeIt(){
+            this.like = !this.like
+            this.$api.recommend.likeSong({
+                id:this.audio.id,
+                like:this.like
+            }).then(res => {
+                console.log(res)
+            })
+        },
+
+        //单曲循环/列表循环
+        changeType(){
+            console.log(this.playType)
+            if (this.playType == 1) {
+                this.changePlayType(0)
+                
+            } else if (this.playType == 0) {
+                this.changePlayType(1)
+            }
         }
     },
     computed:{
         // ...mapGetters(['getSongList'])
-        ...mapState(['audio'])
+        ...mapState(['audio','playType'])
     },
 
     mounted(){

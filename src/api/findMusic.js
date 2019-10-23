@@ -28,6 +28,11 @@ const recommend = {
         return axios.get(`${base.sq}/song/url`,{
             params:params
         })
+    },
+    likeSong(params) {
+        return axios.get(`${base.sq}/like`,{
+            params:params
+        })
     }
 }
 export default recommend
