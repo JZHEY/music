@@ -2,7 +2,7 @@
   <div class="play">
       
       <div class="bar">
-          <login-bar :iconLeft=iconLeft :text=text :iconRight=iconRight></login-bar>
+          <login-bar :iconLeft=iconLeft :text=audio.name :iconRight=iconRight></login-bar>
       </div>
       <div class="singer">
             {{ audio.desc }}
@@ -60,7 +60,7 @@ export default {
             text:'可惜我是水瓶座',
             iconRight:'icon-fenxiang',
             songData:{},
-            index:0,//歌曲下标索引
+            // index:0,//歌曲下标索引
             url:'',//图片地址
             playIcon:'',//音乐是否播放
             deg:0, //转动角度
@@ -85,7 +85,7 @@ export default {
 
         //下一曲
         nextSong(){
-            this.addCurrentSong()
+            this.$store.commit('addCurrentSong')
             let id = this.audio.id
             console.log(id)
             this.getSongDetail(id)
@@ -93,24 +93,24 @@ export default {
 
         //上一曲
         preSong(){
-            this.reduceCurrentSong()
+            this.$store.commit('reduceCurrentSong')
             let id = this.audio.id
             this.getSongDetail(id)
         },
         
         //获取歌曲的详细信息
-        getSongDetail(id){
-            this.$api.recommend.songDetail({
-                ids:id
-            }).then(res => {
-                console.log(res)
-                if(res.status === 200) {
-                    this.songData = res.data.songs
-                    this.text = this.songData[0].name
-                    this.getSongUrl(this.songData[0].id)
-                }
-            })
-        },
+        // getSongDetail(id){
+        //     this.$api.recommend.songDetail({
+        //         ids:id
+        //     }).then(res => {
+        //         console.log(res)
+        //         if(res.status === 200) {
+        //             this.songData = res.data.songs
+        //             this.text = this.songData[0].name
+        //             this.getSongUrl(this.songData[0].id)
+        //         }
+        //     })
+        // },
 
         //获取歌曲的播放url
         getSongUrl(id){
@@ -166,22 +166,22 @@ export default {
         changeType(){
             console.log(this.playType)
             if (this.playType == 1) {
-                this.changePlayType(0)
+                this.$store.commit('changePlayType',0)
                 
             } else if (this.playType == 0) {
-                this.changePlayType(1)
+                this.$store.commit('changePlayType',1)
             }
         }
     },
     computed:{
         // ...mapGetters(['getSongList'])
-        ...mapState(['audio','playType'])
+        ...mapGetters(['audio','playType'])
     },
 
     mounted(){
-        this.index = this.$route.query.index
+        // this.index = this.$route.query.index
         // this.getAlbumDetail(this.getSongList[this.index].id)
-        this.getSongDetail(this.audio.id)
+        this.getSongUrl(this.audio.id)
         this.playOrNo()
         // this.des = this.$route.query.des
         

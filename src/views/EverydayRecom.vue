@@ -61,6 +61,42 @@ export default {
             })
         },
 
+        getPlayList(id){
+            this.$api.recommend.playlist({
+                id:id
+            }).then(res => {
+                console.log(res,'playList')
+                if(res.status === 200){
+                    this.dealPlayList(res.data.playlist.tracks)
+                }
+            })
+        },
+
+        dealPlayList(data) {
+            let des = ''
+            data.forEach(item => {
+                item.ar.forEach(element => {
+                    des += element.name + '/'
+                });
+
+                this.detailList.push({
+                    picUrl:item.al.picUrl,
+                    name:item.name,
+                    desc:des.substr(0,des.length-1),
+                    id:item.id
+                })
+
+                des = ''
+            });
+            
+            // privileges.forEach((item,index) => {
+
+            //     this.detailList[index].id = item.id
+            // });
+
+            this.$store.commit('changeSongList',this.detailList)
+        },
+
         //将获取到得数据处理成为description 传给子组件song-item
         dealdata(data){
             let des = ''
@@ -78,20 +114,26 @@ export default {
                 })
                 des = ''
             });
-            this.changeSongList(this.detailList)
+            this.$store.commit('changeSongList',this.detailList)
             console.log(this.detailList)
         },
         ...mapMutations(['changeCurrentSong','changeSongList']),
         // gotoPlay(id,albumId,des){
         gotoPlay(index){
             // this.$router.push({name:'play',query:{id:id,albumId:albumId,des:des}})
-            this.changeCurrentSong(index)
+            this.$store.commit('changeCurrentSong',index);
+            // this.changeCurrentSong(index)
             console.log(index)
-            this.$router.push({name:'play',query:{index:index}})
+            this.$router.push({name:'play'})
         }
     },
     mounted(){
-        this.getEverydaySongsList()
+        if(this.$route.query.id){
+            this.getPlayList(this.$route.query.id)
+        }else{
+            this.getEverydaySongsList()
+        }
+        
     }
 }
 </script>

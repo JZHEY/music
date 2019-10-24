@@ -33,6 +33,11 @@ const recommend = {
         return axios.get(`${base.sq}/like`,{
             params:params
         })
+    },
+    playlist(params) {
+        return axios.get(`${base.sq}/playlist/detail`,{
+            params:params
+        })
     }
 }
 export default recommend

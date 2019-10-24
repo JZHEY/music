@@ -37,8 +37,8 @@ export default {
 
       this.currentTime = res.target.currentTime / 100
       this.maxTime = this.duration / 100
-      // console.log(this.currentTime,this.duration)
-      if(this.currentTime * 100 == this.duration && this.currentTime > 0 && this.duration > 0){
+      // console.log((this.currentTime*100).toFixed(4),this.duration.toFixed(4))
+      if((this.currentTime*100).toFixed(4) == this.duration.toFixed(4) && this.currentTime > 0 && this.duration > 0){
         this.currentTime = 0
         console.log('end   end')
         if(this.playType == 1){
@@ -61,13 +61,14 @@ export default {
 
     sliderChang(val){
       // console.log(val)
+      // console.log(document.getElementById('app'))
       this.$refs.audio.currentTime = val * 100
     }
     
   },
 
   computed:{
-    ...mapState(['playType'])
+    ...mapGetters(['playType'])
   },
 
   mounted(){

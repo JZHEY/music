@@ -1,6 +1,6 @@
 <template>
   <div class="song-list">
-      <div class="song-item" v-for="item in songList" :key="item.id">
+      <div class="song-item" v-for="item in songList" :key="item.id" @click="handleClick(item.id)">
           <recommend-item :picUrl=item.picUrl :playCount=item.playCount :name=item.name></recommend-item>
       </div>
   </div>
@@ -24,7 +24,9 @@ export default {
         }
     },
     methods:{
-
+        handleClick(id){
+            this.$router.push({name:'everydayRecomm',query:{id:id}})
+        }
     },
     mounted(){
         

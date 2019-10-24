@@ -34,7 +34,16 @@ export default {
      //改变播放方式
      changePlayType: (state,index) => {
         state.playType = index
-     }
+     },
+
+     changeDuration:(state,data) => {
+        state.duration = data
+        return state.duration
+    },
+    changeCurrentTime:(state,data) => {
+        state.currentTime = data
+        return state.currentTime
+    },
 }
 
 /**
