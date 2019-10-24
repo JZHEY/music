@@ -88,14 +88,14 @@ export default {
             this.$store.commit('addCurrentSong')
             let id = this.audio.id
             console.log(id)
-            this.getSongDetail(id)
+            this.getSongUrl(id)
         },
 
         //上一曲
         preSong(){
             this.$store.commit('reduceCurrentSong')
             let id = this.audio.id
-            this.getSongDetail(id)
+            this.getSongUrl(id)
         },
         
         //获取歌曲的详细信息
