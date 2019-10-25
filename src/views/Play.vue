@@ -25,8 +25,8 @@
         </div>
 
         <div class="progress">
-            <vue-audio :url=url ref="vueaudio"></vue-audio>
             
+            <slider></slider>
         </div>
 
 
@@ -45,6 +45,7 @@
 <script>
 import LoginBar from '@/components/LoginBar.vue'
 import VueAudio from '@/components/Audio.vue'
+import Slider from '@/components/Slider.vue'
 import {mapState,mapGetters,mapMutations} from 'vuex';
 import api from '@/api/index'
 
@@ -52,7 +53,8 @@ export default {
     name:'Play',
     components:{
         LoginBar,
-        VueAudio
+        VueAudio,
+        Slider
     },
     data(){
         return {
@@ -61,7 +63,7 @@ export default {
             iconRight:'icon-fenxiang',
             songData:{},
             // index:0,//歌曲下标索引
-            url:'',//图片地址
+            // url:'',//图片地址
             playIcon:'',//音乐是否播放
             deg:0, //转动角度
             timer:null, //图片转动定时器
@@ -69,7 +71,12 @@ export default {
         }
     },
     methods:{
-        ...mapMutations(['addCurrentSong','reduceCurrentSong','changePlayType']),
+        ...mapMutations([
+            'addCurrentSong',
+            'reduceCurrentSong',
+            'changePlayType',
+            'changeUrl'
+        ]),
         //获取专辑详细信息
         getAlbumDetail(id){
             this.$api.recommend.albumDetail({
@@ -119,7 +126,8 @@ export default {
             }).then(res => {
                 console.log(res)
                 if(res.status === 200){
-                   this.url = res.data.data[0].url
+                    this.$store.commit('changeUrl',res.data.data[0].url)
+                //    this.url = res.data.data[0].url
                 }
                 
             })
@@ -128,7 +136,8 @@ export default {
 
         //判断音乐是否播放
         playOrNo(){
-            this.playIcon = this.$refs.vueaudio.musicPlayOrNo()
+            console.log(this.$parent.$refs.vueaudio.musicPlayOrNo())
+            this.playIcon = this.$parent.$refs.vueaudio.musicPlayOrNo()
             // this.rotate()
             this.rotate(this.playIcon)
         },

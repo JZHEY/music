@@ -15,5 +15,9 @@ export default {
 
     audio: state => state.audio,
     playType: state => state.playType,
-    currentSong:state => state.currentSong
+    currentSong: state => state.currentSong,
+    currentTime: state => state.currentTime,
+    duration: state => state.duration,
+    url: state => state.url,
+    playOrNo: state => state.playOrNo
 }

@@ -36,14 +36,27 @@ export default {
         state.playType = index
      },
 
+     //改变时间
      changeDuration:(state,data) => {
         state.duration = data
         return state.duration
     },
+    
+    //改变当前播放时间
     changeCurrentTime:(state,data) => {
         state.currentTime = data
         return state.currentTime
     },
+
+    //改变链接
+    changeUrl:(state,data) => {
+        state.url = data
+    },
+
+    //改变播放与否
+    changePlayOrNo: (state,data) => {
+        state.playOrNo = data
+    }
 }
 
 /**
