@@ -57,7 +57,7 @@ export default {
     if(getCookie()){
       next({ name : 'find'})
     } else {
-      next({ name: 'loginIndex' })
+      next()
     }
   },
 }

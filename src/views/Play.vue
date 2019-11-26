@@ -18,7 +18,7 @@
 
       <div class="operation">
         <div class="song-operation">
-            <div class="iconfont icon-shoucang"></div>
+            <div class="iconfont icon-shoucang" :class="{'active':like}" @click="likeIt()"></div>
             <div class="iconfont icon-xiazai"></div>
             <div class="iconfont icon-pinglun"></div>
             <div class="iconfont icon-diandiandianshu"></div>
@@ -35,9 +35,39 @@
             <div class="iconfont icon-shangyishoushangyige" @click="preSong"></div>
             <div class="iconfont " :class="[playIcon ? 'icon-bofang1' : 'icon-bofang3']" style="font-size:6rem" @click="playOrNo"></div>
             <div class="iconfont icon-xiayigexiayishou" @click="nextSong"></div>
-            <div class="iconfont icon-liebiao"></div>
+            <div class="iconfont icon-liebiao"  @click="drawer = true"></div>
         </div>
       </div>
+
+    
+      <el-drawer
+        :visible.sync="drawer"
+        direction="btt"
+        size="60%">
+        <!-- <span>我来啦!</span> -->
+        <div class="title" slot="title" style="1px solid red">
+            <span class="left">
+                <i class="iconfont icon-gengxin"></i>
+                <span style="font-size:1.5rem">循环列表</span>
+                <span>( {{ songList.length }} )</span>
+            </span>
+            <span class="right" style="margin-left:10rem">
+                <i class="iconfont icon-shoucangshuji"></i>
+                <span style="font-size:1.5rem">收藏全部</span>
+            </span>
+        </div>
+        <div class="playLt">
+            <div class="playItem" v-for="item in songList" :key="item.id">
+                <div class="song">
+                    {{ item.name }}
+                </div>
+                <div class="desc">
+                    {{ item.desc }}
+                </div>
+            </div>
+        </div>
+      </el-drawer>
+      
       
   </div>
 </template>
@@ -46,7 +76,7 @@
 import LoginBar from '@/components/LoginBar.vue'
 import VueAudio from '@/components/Audio.vue'
 import Slider from '@/components/Slider.vue'
-import {mapState,mapGetters,mapMutations} from 'vuex';
+import { mapState,mapGetters,mapMutations } from 'vuex';
 import api from '@/api/index'
 
 export default {
@@ -67,7 +97,9 @@ export default {
             playIcon:'',//音乐是否播放
             deg:0, //转动角度
             timer:null, //图片转动定时器
-            typeIcon:['icon-danquxunhuan','icon-xunhuanbofang']
+            typeIcon:['icon-danquxunhuan','icon-xunhuanbofang'],
+            drawer:false,
+            like:false
         }
     },
     methods:{
@@ -136,10 +168,11 @@ export default {
 
         //判断音乐是否播放
         playOrNo(){
-            console.log(this.$parent.$refs.vueaudio.musicPlayOrNo())
+            // console.log(this.$parent.$refs.vueaudio.musicPlayOrNo())
             this.playIcon = this.$parent.$refs.vueaudio.musicPlayOrNo()
-            // this.rotate()
+            console.log(this.playIcon)
             this.rotate(this.playIcon)
+            // this.rotate()
         },
 
         //旋转
@@ -154,7 +187,7 @@ export default {
                     }
                 }, 30);
             } else {
-                // console.log(`guan·····`)
+                console.log(`......·····`)
                 clearInterval(this.timer)
                 this.timer = null
             }
@@ -184,7 +217,7 @@ export default {
     },
     computed:{
         // ...mapGetters(['getSongList'])
-        ...mapGetters(['audio','playType'])
+        ...mapGetters(['audio','playType','songList'])
     },
 
     mounted(){
@@ -192,6 +225,9 @@ export default {
         // this.getAlbumDetail(this.getSongList[this.index].id)
         this.getSongUrl(this.audio.id)
         this.playOrNo()
+        this.playIcon = true  
+        // this.rotate(this.playIcon)
+        this.deg = 0
         // this.des = this.$route.query.des
         
     }
@@ -246,6 +282,9 @@ export default {
             
             .iconfont
                 font-size 3rem
+            
+            .active
+                color red
         
         .progress
             width 100%
@@ -259,5 +298,8 @@ export default {
 
             .iconfont
                 font-size 3rem
+        
+    .el-drawer
+        border 1px solid red
         
 </style>

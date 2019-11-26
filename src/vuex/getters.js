@@ -19,5 +19,6 @@ export default {
     currentTime: state => state.currentTime,
     duration: state => state.duration,
     url: state => state.url,
-    playOrNo: state => state.playOrNo
+    playOrNo: state => state.playOrNo,
+    songList: state => state.songList
 }

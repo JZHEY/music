@@ -66,6 +66,7 @@ export default {
 
     musicPlayOrNo(){
       console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+      console.log(this.$refs.audio.paused)
       if(this.$refs.audio.paused){
         this.$refs.audio.play()
         console.log('kai')

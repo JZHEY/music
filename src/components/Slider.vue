@@ -20,11 +20,11 @@ export default {
         ]),
 
         sliderChang(val){
-        console.log(val)
-        console.log(document.getElementById('v-audio').childNodes[0].currentTime)
-        document.getElementById('v-audio').childNodes[0].currentTime = val * 100
-        // this.$refs.audio.currentTime = val * 100
-        this.$store.commit('changeCurrentTime',val * 100)
+            console.log(val)
+            console.log(document.getElementById('v-audio').childNodes[0].currentTime)
+            document.getElementById('v-audio').childNodes[0].currentTime = val * 100
+            // this.$refs.audio.currentTime = val * 100
+            this.$store.commit('changeCurrentTime',val * 100)
         }
     },
     computed:{
@@ -35,8 +35,8 @@ export default {
             get() {
                 return this.$store.state.currentTime
             },
-            set() {
-                
+            set(newCurrent) {
+                this.$store.state.currentTime = newCurrent
             }
         }
     },
