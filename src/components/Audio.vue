@@ -84,11 +84,18 @@ export default {
   computed:{
     ...mapGetters([
       'playType',
-      'currentTime',
       'duration',
       'url',
       'audio'
-      ])
+      ]),
+      currentTime:{
+            get() {
+                return this.$store.state.currentTime
+            },
+            set(newCurrent) {
+                this.$store.state.currentTime = newCurrent
+            }
+        }
   },
 
   mounted(){

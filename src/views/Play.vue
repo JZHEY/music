@@ -51,13 +51,13 @@
                 <span style="font-size:1.5rem">循环列表</span>
                 <span>( {{ songList.length }} )</span>
             </span>
-            <span class="right" style="margin-left:10rem">
+            <span class="right" style="">
                 <i class="iconfont icon-shoucangshuji"></i>
                 <span style="font-size:1.5rem">收藏全部</span>
             </span>
         </div>
         <div class="playLt">
-            <div class="playItem" v-for="item in songList" :key="item.id">
+            <div class="playItem" v-for="(item,index) in songList" :key="item.id" @click="listenThisSong(item,index)">
                 <div class="song">
                     {{ item.name }}
                 </div>
@@ -107,7 +107,8 @@ export default {
             'addCurrentSong',
             'reduceCurrentSong',
             'changePlayType',
-            'changeUrl'
+            'changeUrl',
+            'changeCurrentSong'
         ]),
         //获取专辑详细信息
         getAlbumDetail(id){
@@ -213,6 +214,12 @@ export default {
             } else if (this.playType == 0) {
                 this.$store.commit('changePlayType',1)
             }
+        },
+
+        listenThisSong(option,index){
+            console.log(option,index)
+            this.$store.commit('changeCurrentSong',index)
+            this.getSongUrl(option.id)
         }
     },
     computed:{
@@ -299,7 +306,33 @@ export default {
             .iconfont
                 font-size 3rem
         
-    .el-drawer
-        border 1px solid red
-        
+
+</style>
+<style lang="stylus">
+.el-dialog__wrapper
+    .btt
+        .el-drawer__header
+            margin-bottom 2rem 
+    
+            .title
+                display flex
+                justify-content space-between
+                align-items center
+
+        .el-drawer__body
+            height 100%
+
+            .playLt
+                height 100%
+                overflow hidden
+                overflow-y scroll
+
+                .playItem
+                    width 86%
+                    height 30px
+                    margin-left 7%
+                    display flex
+                    justify-content space-between
+                    font-size 1.5rem
+                    color #72767b
 </style>
